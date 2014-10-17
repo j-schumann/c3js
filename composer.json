@@ -1,0 +1,16 @@
+{
+    "name": "danielklischies/c3js",
+    "description": "C3Js wrapper for ZF2",
+    "license": "private",
+    "homepage": "http://www.danielklischies.net/",
+
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "~2.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "C3Js": "src/"
+        }
+    }
+}

@@ -4,13 +4,13 @@ namespace C3Js\Chart\Interfaces;
 
 interface Chart
 {
-	/**
+    /**
      * Creates a new chart.
      * 
      * @param string $name The chart's name, has to be equal to the name in the data json
      * @return void
      */    
-	public function __construct($name);
+    public function __construct($name);
     
     /**
      * Sets the name of the chart
@@ -18,14 +18,22 @@ interface Chart
      * @param string $name The chart's name, has to be equal to the name in the data json
      * @return void
      */
-	public function setName($name);
+    public function setName($name);
+    
+    /**
+     * Sets the display name of the chart 
+     * 
+     * @param string $name The chart's display name (e.g. translated name)
+     * @return void
+     */
+    public function setDisplayName($name);
     
     /**
      * Returns this chart's name
      *
      * @return string $name
      */
-	public function getName();
+    public function getName();
     
     /**
      * Sets the chart's color. For areacharts the area color will also be derived from this
@@ -33,19 +41,19 @@ interface Chart
      * @param string $color The (hex-)color you want to set, e.g. #6600ff
      * @return void
      */
-	public function setColor($color);
+    public function setColor($color);
     
     /**
      * Returns this chart's color
      * 
      * @return string $color
      */
-	public function getColor();
+    public function getColor();
     
     /**
      * Converts this chart to an array for processing by the container
      * 
      * @return array $chart
      */
-	public function toArray();
+    public function toArray();
 }

@@ -2,35 +2,39 @@
 /**
  *  @author      Daniel Klischies <daniel@danielklischies.net>
  */
- 
+
 namespace C3Js\View\Helper;
 
+use C3Js\Chart\Container;
 use Zend\View\Helper\AbstractHelper;
 
 /**
  * Injects the javascripts and css files required for c3js into the header
- * and renders the DOM element with the calendar configuration.
+ * and renders the DOM element with the chart configuration.
  */
 class C3Js extends AbstractHelper
 {
     protected static $initialized = false;
-	protected static $id = 0;
-	protected $config = array();
-	
-	/**
+    protected static $id = 0;
+    protected $config = array();
+
+    /**
      * Prepended to the head-scripts/styles
      *
      * @var string
      */
     protected $scriptPath = '/c3js';
 
-
     /**
-     * {@inheritdoc}
+     * Either renders the given container or returns the helper instance.
+     *
+     * @param \C3Js\Chart\Container $container
      */
-    public function __invoke(\C3Js\Chart\Container $container)
+    public function __invoke(Container $container = null)
     {
-        return $this->render($container);
+        return $container
+            ? $this->render($container)
+            : $this;
     }
 
     /**
@@ -39,11 +43,16 @@ class C3Js extends AbstractHelper
      * @param \C3Js\Chart\Container $container
      * @return string
      */
-    public function render(\C3Js\Chart\Container $container)
+    public function render(Container $container)
     {
-		if(!self::$initialized)
-			$this->includeC3Js();
-		$container->setId("#chart-".(self::$id++));
+        if(!self::$initialized) {
+            $this->includeC3Js();
+        }
+
+        // @todo nur automatisch generierte ID verwenden wenn keine individuelle
+        // gesetzt wurde
+        $container->setId("#chart-".(self::$id++));
+
         return '<div id="'.($container->getIdForHtml()).'" data-c3js="'.($container->toJson()).'" class="chart chart--autoload"></div>';
     }
 
@@ -58,14 +67,14 @@ class C3Js extends AbstractHelper
         $this->getView()->headLink()
             ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.css');
         $this->getView()->headScript()
-			->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js')
-			// ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.js')
-			->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.js')
-			->appendFile($this->scriptPath.'/c3helper.js');
-		self::$initialized = true;
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js')
+            // ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.js')
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.js')
+            ->appendFile($this->scriptPath.'/c3helper.js');
+        self::$initialized = true;
+
         return $this;
     }
-
 
     /**
      * Returns the base path where the c3helper script files are located.
@@ -88,5 +97,4 @@ class C3Js extends AbstractHelper
         $this->scriptPath = $path;
         return $this;
     }
-
 }

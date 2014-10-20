@@ -1,7 +1,7 @@
 <?php
 namespace C3Js\Chart;
 
-abstract class BaseChart implements Interfaces\Chart
+abstract class BaseChart implements ChartInterface
 {
     protected $name;
     protected $config = array(
@@ -18,37 +18,45 @@ abstract class BaseChart implements Interfaces\Chart
             )
         )
     );
-    
-    public function __construct($name) {
+
+    public function __construct($name)
+    {
         $this->name = $name;
         // Extract charttype from classname (strip away namespace and "chart" at the end of the classname)
         // Eg.: LineChart -> line
         $this->config['data']['types'][$this->name] = strtolower(substr(get_class($this), 11, -5));
-        if ($this->config['data']['types'][$this->name] !== "area")
+        if ($this->config['data']['types'][$this->name] !== "area") {
             str_replace('area', 'area-', $this->config['data']['types'][$this->name]);
+        }
     }
-    
-    public function setName($name) {
+
+    public function setName($name)
+    {
         $this->name = $name;
     }
-    
-    public function setDisplayName($name) {
+
+    public function setDisplayName($name)
+    {
         $this->config['data']['names'][$this->name] = $name;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
-    
-    public function setColor($color) {
+
+    public function setColor($color)
+    {
         $this->config['data']['colors'][$this->name] = $color;
     }
-    
-    public function getColor() {
+
+    public function getColor()
+    {
         return $this->config['data']['colors'][$this->name];
     }
-    
-    public function toArray() {
+
+    public function toArray()
+    {
         return $this->config;
     }
 }

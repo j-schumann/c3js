@@ -11,9 +11,7 @@ use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 /**
  * Module bootstrapping.
  */
-class Module implements
-    ConfigProviderInterface,
-    ViewHelperProviderInterface
+class Module implements ConfigProviderInterface, ViewHelperProviderInterface
 {
     /**
      * Returns the modules default configuration.
@@ -36,7 +34,7 @@ class Module implements
             'factories' => array(
                 'C3Js' => function($helperPluginManager) {
                     $helper = new View\Helper\C3Js();
-					
+
                     $serviceLocator = $helperPluginManager->getServiceLocator();
                     $config = $serviceLocator->get('Config');
                     if (!empty($config['C3Js']['script_path'])) {

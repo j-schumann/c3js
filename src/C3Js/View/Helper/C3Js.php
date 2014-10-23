@@ -1,6 +1,8 @@
 <?php
 /**
- *  @author      Daniel Klischies <daniel@danielklischies.net>
+ * @copyright   (c) 2014, Vrok
+ * @license     http://customlicense CustomLicense
+ * @author      Daniel Klischies <daniel@danielklischies.net>
  */
 
 namespace C3Js\View\Helper;
@@ -14,8 +16,25 @@ use Zend\View\Helper\AbstractHelper;
  */
 class C3Js extends AbstractHelper
 {
+    /**
+     * Flag showing whether the required JS/CSS files were included.
+     *
+     * @var bool
+     */
     protected static $initialized = false;
+
+    /**
+     * Stores the last created autoincrement ID for the chart container DOM id.
+     *
+     * @var int
+     */
     protected static $id = 0;
+
+    /**
+     * Holds the complete C3JS options.
+     *
+     * @var array
+     */
     protected $config = array();
 
     /**
@@ -59,11 +78,16 @@ class C3Js extends AbstractHelper
     /**
      * Adds the Javascript and CSS files to the <head>.
      * Call this once from the layout or from every page that displays a c3 Chart.
+     * Automatically called by render().
      *
      * @return self
      */
     public function includeC3Js()
     {
+        if (self::$initialized) {
+            return $this;
+        }
+
         $this->getView()->headLink()
             ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.css');
         $this->getView()->headScript()
@@ -71,8 +95,8 @@ class C3Js extends AbstractHelper
             // ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.js')
             ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.js')
             ->appendFile($this->scriptPath.'/c3helper.js');
-        self::$initialized = true;
 
+        self::$initialized = true;
         return $this;
     }
 

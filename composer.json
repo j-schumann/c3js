@@ -2,7 +2,7 @@
     "name": "vrok/c3js",
     "description": "C3Js wrapper for ZF2",
     "license": "private",
-    "homepage": "http://www.danielklischies.net/",
+    "homepage": "http://www.vrok.de/",
 
     "require": {
         "php": ">=5.4",

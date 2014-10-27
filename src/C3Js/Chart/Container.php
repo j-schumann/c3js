@@ -245,16 +245,6 @@ class Container
     }
 
     /**
-     * Allows to set the names used for each chart as legend/tooltip.
-     *
-     * @param array $names  [chartName => displayName, ...]
-     */
-    public function setDataNames(array $names)
-    {
-        $this->config['data']['names'] = $names;
-    }
-
-    /**
      * Returns an array that can be put into c3.generate.
      *
      * @param bool $withcharts (true) Specifies wether the charts are written

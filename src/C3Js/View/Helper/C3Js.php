@@ -89,11 +89,12 @@ class C3Js extends AbstractHelper
         }
 
         $this->getView()->headLink()
-            ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.css');
+            ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.9/c3.min.css');
+            //->appendStylesheet('/css/c3.min.css');
         $this->getView()->headScript()
-            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js')
-            // ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.js')
-            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.js')
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js')
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.9/c3.min.js')
+            //->appendFile('/js/c3.js')
             ->appendFile($this->scriptPath.'/c3helper.js');
 
         self::$initialized = true;

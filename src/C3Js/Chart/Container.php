@@ -247,7 +247,7 @@ class Container
     /**
      * Returns an array that can be put into c3.generate.
      *
-     * @param bool $withcharts (true) Specifies wether the charts are written
+     * @param bool $withcharts (true) Specifies whether the charts are written
      *     into the array, set it to false if you want to use fromArray later on
      * @return array
      */

@@ -30,7 +30,7 @@ class LineChart extends BaseChart
     }
 
      /**
-     * Specifies wether you want this chart to use the primary (1)
+     * Specifies whether you want this chart to use the primary (1)
      * or the secondary (2) y-axis.
      *
      * @link http://c3js.org/samples/axes_y2.html

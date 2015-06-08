@@ -5,8 +5,8 @@
     "homepage": "http://www.vrok.de/",
 
     "require": {
-        "php": ">=5.4",
-        "zendframework/zendframework": "~2.4.0"
+        "php": ">=5.5",
+        "zendframework/zendframework": "~2.5.1"
     },
     "autoload": {
         "psr-0": {

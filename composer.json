@@ -9,8 +9,8 @@
         "zendframework/zendframework": "~2.5.1"
     },
     "autoload": {
-        "psr-0": {
-            "C3Js": "src/"
+        "psr-4": {
+            "C3Js\\": "src/"
         }
     }
 }

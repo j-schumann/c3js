@@ -29,49 +29,49 @@ class Container
      *
      * @var array
      */
-    private $config = array(
-        'data' => array(
-            'axes'       => array(),
-            'colors'     => array(),
+    private $config = [
+        'data' => [
+            'axes'       => [],
+            'colors'     => [],
             'mimeType'   => 'json',
-            'names'      => array(),
-            'types'      => array(),
+            'names'      => [],
+            'types'      => [],
             'xFormat'    => '%Y-%m-%d %H:%M:%S',
             'xLocaltime' => true,
-            'xs'         => array(),
-        ),
-        'axis' => array(
-            'x' => 	array(
-                'label' => array(
+            'xs'         => [],
+        ],
+        'axis' => [
+            'x' => [
+                'label' => [
                     'position' => 'outer-center',
-                ),
-                'padding' => array(
+                ],
+                'padding' => [
                     'left' => 0,
-                ),
-            ),
-            'x1' => array(
-                'padding' => array(),
-            ),
-            'x2' => array(
-                'padding' => array(),
-            ),
-            'y' => array(
-                'label' => array(
+                ],
+            ],
+            'x1' => [
+                'padding' => [],
+            ],
+            'x2' => [
+                'padding' => [],
+            ],
+            'y' => [
+                'label' => [
                     'position' => 'outer-center',
-                ),
-                'padding' => array(
+                ],
+                'padding' => [
                     'bottom' => 0
-                ),
-            ),
-            'y2' => array(
-                'label' => array(
+                ],
+            ],
+            'y2' => [
+                'label' => [
                     'position' => 'outer-center',
-                ),
-                'padding' => array(),
+                ],
+                'padding' => [],
                 'show' => false,
-            ),
-        ),
-    );
+            ],
+        ],
+    ];
 
     /**
      * Constructor
@@ -79,7 +79,7 @@ class Container
      * @param string $dataUrl The URL to pull the actual data from
      * @param array $config Optional configuration array, gets merges with defaults
      */
-    public function __construct($dataUrl, array $config = array())
+    public function __construct($dataUrl, array $config = [])
     {
         $this->config['data']['url'] = $dataUrl;
         $this->config = array_replace_recursive($this->config, $config);
@@ -98,7 +98,7 @@ class Container
         $json = \Zend\Json\Json::encode(
             $this->toArray(),
             false,
-            array('enableJsonExprFinder' => true)
+            ['enableJsonExprFinder' => true]
         );
 
         return htmlspecialchars($json);
@@ -160,7 +160,7 @@ class Container
      */
     public function setAxisPadding($axis, $where, $amount)
     {
-        if (!in_array($where, array('top', 'bottom', 'left', 'right'))) {
+        if (!in_array($where, ['top', 'bottom', 'left', 'right'])) {
             throw new Exception\InvalidArgumentException(
                     '$where has to be one of "top", "left", "right", "bottom"');
         }
@@ -212,7 +212,7 @@ class Container
     public function setXAxisTickFormat($format)
     {
         if (!isset($this->config['axis']['x']['tick'])) {
-            $this->config['axis']['x']['tick'] = array();
+            $this->config['axis']['x']['tick'] = [];
         }
         $this->config['axis']['x']['tick']['format'] = $format;
     }
@@ -239,7 +239,7 @@ class Container
     public function setXAxisTickCount($count)
     {
         if (!isset($this->config['axis']['x']['tick'])) {
-            $this->config['axis']['x']['tick'] = array();
+            $this->config['axis']['x']['tick'] = [];
         }
         $this->config['axis']['x']['tick']['count'] = $count;
     }

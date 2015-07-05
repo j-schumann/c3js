@@ -26,20 +26,20 @@ abstract class BaseChart implements ChartInterface
      *
      * @var array
      */
-    protected $config = array(
-        'data' => array(
-            'axes' => array(),
-            'colors' => array(),
-            'names' => array(),
-            'types' => array(),
-            'xs' => array()
-        ),
-        'axis' => array(
-            'y2' => array(
-                "show" => false
-            )
-        )
-    );
+    protected $config = [
+        'data' => [
+            'axes'   => [],
+            'colors' => [],
+            'names'  => [],
+            'types'  => [],
+            'xs'     => []
+        ],
+        'axis' => [
+            'y2' => [
+                'show' => false
+            ],
+        ],
+    ];
 
     /**
      * {@inheritdoc}

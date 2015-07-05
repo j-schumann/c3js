@@ -2,15 +2,15 @@
 /**
  * C3JS config
  */
-return array(
-    'asset_manager' => array(
-        'resolver_configs' => array(
-            'paths' => array(
+return [
+    'asset_manager' => [
+        'resolver_configs' => [
+            'paths' => [
                 __DIR__ . '/../public',
-            ),
-        ),
-    ),
-    'C3Js' => array(
+            ],
+        ],
+    ],
+    'C3Js' => [
         'script_path' => '/c3js',
-    )
-);
+    ]
+];

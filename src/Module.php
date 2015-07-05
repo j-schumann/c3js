@@ -32,8 +32,8 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface
      */
     public function getViewHelperConfig()
     {
-        return array(
-            'factories' => array(
+        return [
+            'factories' => [
                 'C3Js' => function($helperPluginManager) {
                     $helper = new View\Helper\C3Js();
 
@@ -48,7 +48,7 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface
 
                     return $helper;
                 },
-            ),
-        );
+            ],
+        ];
     }
 }

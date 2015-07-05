@@ -35,7 +35,7 @@ class C3Js extends AbstractHelper
      *
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * Prepended to the head-scripts/styles

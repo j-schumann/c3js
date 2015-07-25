@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright   (c) 2014, Vrok
  * @license     http://customlicense CustomLicense
@@ -32,11 +33,11 @@ abstract class BaseChart implements ChartInterface
             'colors' => [],
             'names'  => [],
             'types'  => [],
-            'xs'     => []
+            'xs'     => [],
         ],
         'axis' => [
             'y2' => [
-                'show' => false
+                'show' => false,
             ],
         ],
     ];
@@ -63,7 +64,7 @@ abstract class BaseChart implements ChartInterface
         // Namen die camelcased sind für view-scripte etc in lowercase mit
         // Bindestrich umgewandelt, am besten hier die gleiche Funktionalität
         // verwenden, replace uppercase char mit Bindestrich+lowercase char
-        if ($this->config['data']['types'][$this->name] !== "area") {
+        if ($this->config['data']['types'][$this->name] !== 'area') {
             str_replace('area', 'area-', $this->config['data']['types'][$this->name]);
         }
     }

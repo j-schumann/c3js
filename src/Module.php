@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright   (c) 2014, Vrok
  * @license     http://customlicense CustomLicense
@@ -22,7 +23,7 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface
      */
     public function getConfig()
     {
-        return include __DIR__ . '/../config/module.config.php';
+        return include __DIR__.'/../config/module.config.php';
     }
 
     /**
@@ -34,7 +35,7 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface
     {
         return [
             'factories' => [
-                'C3Js' => function($helperPluginManager) {
+                'C3Js' => function ($helperPluginManager) {
                     $helper = new View\Helper\C3Js();
 
                     $serviceLocator = $helperPluginManager->getServiceLocator();

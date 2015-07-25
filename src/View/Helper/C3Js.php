@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright   (c) 2014, Vrok
  * @license     http://customlicense CustomLicense
@@ -38,7 +39,7 @@ class C3Js extends AbstractHelper
     protected $config = [];
 
     /**
-     * Prepended to the head-scripts/styles
+     * Prepended to the head-scripts/styles.
      *
      * @var string
      */
@@ -60,17 +61,18 @@ class C3Js extends AbstractHelper
      * Returns the c3js container and adds the necessary init code to the headscript.
      *
      * @param \C3Js\Chart\Container $container
+     *
      * @return string
      */
     public function render(Container $container)
     {
-        if(!self::$initialized) {
+        if (!self::$initialized) {
             $this->includeC3Js();
         }
 
         // @todo nur automatisch generierte ID verwenden wenn keine individuelle
         // gesetzt wurde
-        $container->setId("#chart-".(self::$id++));
+        $container->setId('#chart-'.(self::$id++));
 
         return '<div id="'.($container->getIdForHtml()).'" data-c3js="'.($container->toJson()).'" class="chart chart--autoload"></div>';
     }
@@ -98,6 +100,7 @@ class C3Js extends AbstractHelper
             ->appendFile($this->scriptPath.'/c3helper.js');
 
         self::$initialized = true;
+
         return $this;
     }
 
@@ -115,11 +118,13 @@ class C3Js extends AbstractHelper
      * Sets the base path where the c3helper script files are located.
      *
      * @param string $path
+     *
      * @return self
      */
     public function setScriptPath($path)
     {
         $this->scriptPath = $path;
+
         return $this;
     }
 }

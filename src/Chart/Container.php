@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright   (c) 2014, Vrok
  * @license     http://customlicense CustomLicense
@@ -16,7 +17,7 @@ namespace C3Js\Chart;
 class Container
 {
     /**
-     * All charts belonging to this container
+     * All charts belonging to this container.
      *
      * @var array
      */
@@ -60,7 +61,7 @@ class Container
                     'position' => 'outer-center',
                 ],
                 'padding' => [
-                    'bottom' => 0
+                    'bottom' => 0,
                 ],
             ],
             'y2' => [
@@ -68,25 +69,25 @@ class Container
                     'position' => 'outer-center',
                 ],
                 'padding' => [],
-                'show' => false,
+                'show'    => false,
             ],
         ],
     ];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $dataUrl The URL to pull the actual data from
-     * @param array $config Optional configuration array, gets merges with defaults
+     * @param array  $config  Optional configuration array, gets merges with defaults
      */
     public function __construct($dataUrl, array $config = [])
     {
         $this->config['data']['url'] = $dataUrl;
-        $this->config = array_replace_recursive($this->config, $config);
+        $this->config                = array_replace_recursive($this->config, $config);
     }
 
     /**
-     * Converts the container to json so that it can be passed to c3js
+     * Converts the container to json so that it can be passed to c3js.
      *
      * @return string json
      */
@@ -109,7 +110,6 @@ class Container
      * Make sure that there is a DOM element/container with this id.
      *
      * @param string $id (e.g. #mycontainer)
-     * @return void
      */
     public function setId($id)
     {
@@ -141,7 +141,6 @@ class Container
      * Adds a chart to this container.
      *
      * @param ChartInterface $chart
-     * @return void
      */
     public function addChart(ChartInterface $chart)
     {
@@ -151,12 +150,13 @@ class Container
     /**
      * Sets the padding of an axis.
      *
-     * @param string $axis The axis you want to add the padding to (x1, x2, y1...)
+     * @param string $axis  The axis you want to add the padding to (x1, x2, y1...)
      * @param string $where The direction the padding belongs to (top, left, right, bottom)
      * @param float amount (0 means no padding)
+     *
      * @link http://c3js.org/samples/axes_y_padding.html
+     *
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
     public function setAxisPadding($axis, $where, $amount)
     {
@@ -172,30 +172,31 @@ class Container
     }
 
     /**
-     * Sets the label of an axis
+     * Sets the label of an axis.
      *
-     * @param string $axis The axis you want to set the label for (x, y)
+     * @param string $axis  The axis you want to set the label for (x, y)
      * @param string $label The label you want to set
+     *
      * @link http://c3js.org/samples/axes_label.html
-     * @return void
      */
     public function setAxisLabel($axis, $label)
     {
         $this->config['axis'][$axis]['label']['text'] = $label;
-     }
+    }
 
     /**
      * Sets the type of an x-axis.
      *
      * @param string $type One out of "timeseries", "indexed", "category"
+     *
      * @link http://c3js.org/samples/timeseries.html
      * @link http://c3js.org/samples/categorized.html
+     *
      * @throws \C3Js\Chart\Exception\InvalidArgumentException
-     * @return void
      */
     public function setXAxisType($type)
     {
-        if ($type != "timeseries" && $type != "indexed" && $type != "category") {
+        if ($type != 'timeseries' && $type != 'indexed' && $type != 'category') {
             throw new Exception\InvalidArgumentException(
                 'Invalid X axis type, has to be one of timeseries, indexed or category.');
         }
@@ -207,7 +208,6 @@ class Container
      * with timeseries x-axis.
      *
      * @param string $format The desired format, e.g. %H:%M
-     * @return void
      */
     public function setXAxisTickFormat($format)
     {
@@ -218,12 +218,38 @@ class Container
     }
 
     /**
+     * Sets an output format for y-axis values.
+     *
+     * @param string $format The desired format, e.g. %H:%M
+     */
+    public function setYAxisTickFormat($format)
+    {
+        if (!isset($this->config['axis']['y']['tick'])) {
+            $this->config['axis']['y']['tick'] = [];
+        }
+        $this->config['axis']['y']['tick']['format'] = $format;
+    }
+
+    /**
+     * Sets an output format for y2-axis values.
+     *
+     * @param string $format The desired format, e.g. %H:%M
+     */
+    public function setY2AxisTickFormat($format)
+    {
+        if (!isset($this->config['axis']['y2']['tick'])) {
+            $this->config['axis']['y2']['tick'] = [];
+        }
+        $this->config['axis']['y2']['tick']['format'] = $format;
+    }
+
+    /**
      * Sets the format you want to use to parse x-axis values from the ajax
      * response of your controller.
      *
      * @param string $format
+     *
      * @link http://c3js.org/samples/axes_x_localtime.html
-     * @return void
      */
     public function setXAxisInputFormat($format)
     {
@@ -234,7 +260,6 @@ class Container
      * Sets the number of ticks on the x-axis.
      *
      * @param int $count Number of ticks to display
-     * @return void
      */
     public function setXAxisTickCount($count)
     {
@@ -248,7 +273,8 @@ class Container
      * Returns an array that can be put into c3.generate.
      *
      * @param bool $withcharts (true) Specifies whether the charts are written
-     *     into the array, set it to false if you want to use fromArray later on
+     *                         into the array, set it to false if you want to use fromArray later on
+     *
      * @return array
      */
     public function toArray($withcharts = true)
@@ -261,8 +287,8 @@ class Container
             }
 
             foreach ($this->charts as $chart) {
-                $chartconfig = $chart->toArray();
-                $config['data'] = array_replace_recursive($config['data'], $chartconfig['data']);
+                $chartconfig                  = $chart->toArray();
+                $config['data']               = array_replace_recursive($config['data'], $chartconfig['data']);
                 $config['axis']['y2']['show'] = $chartconfig['axis']['y2']['show'] || $config['axis']['y2']['show'];
             }
         }
@@ -276,6 +302,7 @@ class Container
      * structure-checked neither merged with a default array.
      *
      * @param array $config
+     *
      * @see \C3Js\Chart\Container::toArray()
      */
     public function fromArray(array $config)

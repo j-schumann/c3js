@@ -1,4 +1,53 @@
 (function($) {
+    /**
+     * Copied from c3.chart.internal.fn.load: Custom loading function called
+     * after chart was zoomed/scrolled to use our own redraw() parameters to
+     * prevent the irritating transition effect when scrolling/zooming.
+     *
+     * @param {object} targets
+     * @param {object} args
+     */
+    c3.chart.internal.fn.loadNoTransition = function (targets, args) {
+        var $$ = this;
+        if (targets) {
+            // filter loading targets if needed
+            if (args.filter) {
+                targets = targets.filter(args.filter);
+            }
+            // set type if args.types || args.type specified
+            if (args.type || args.types) {
+                targets.forEach(function (t) {
+                    var type = args.types && args.types[t.id] ? args.types[t.id] : args.type;
+                    $$.setTargetType(t.id, type);
+                });
+            }
+            // Update/Add data
+            $$.data.targets.forEach(function (d) {
+                for (var i = 0; i < targets.length; i++) {
+                    if (d.id === targets[i].id) {
+                        d.values = targets[i].values;
+                        targets.splice(i, 1);
+                        break;
+                    }
+                }
+            });
+            $$.data.targets = $$.data.targets.concat(targets); // add remained
+        }
+
+        // Set targets
+        $$.updateTargets($$.data.targets);
+
+        // Redraw with new targets
+        $$.redraw({
+            withUpdateOrgXDomain: true,
+            withUpdateXDomain: true,
+            withTransition: false, // this is different from chart.internal.load()
+            withLegend: true
+        });
+
+        if (args.done) { args.done(); }
+    };
+
     $.c3Helper = new function() {
         /**
          * Registry of the created chart objects index by their DOM id.
@@ -9,8 +58,6 @@
 
         /**
          * Selects all marked containers after DOMload and creates the charts.
-         *
-         * @returns {undefined}
          */
         this.init = function() {
             $(".chart--autoload").each(function() {
@@ -24,7 +71,6 @@
          * of the container given via its DOM selector.
          *
          * @param {string} container
-         * @returns {undefined}
          */
         this.enableChart = function(container) {
             // do not use $.parseJSON to allow expressions / functions like

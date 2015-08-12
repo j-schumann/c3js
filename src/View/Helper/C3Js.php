@@ -70,9 +70,10 @@ class C3Js extends AbstractHelper
             $this->includeC3Js();
         }
 
-        // @todo nur automatisch generierte ID verwenden wenn keine individuelle
-        // gesetzt wurde
-        $container->setId('#chart-'.(self::$id++));
+        // ensure the container has an ID
+        if (!$container->getId()) {
+            $container->setId('#chart-'.(self::$id++));
+        }
 
         return '<div id="'.($container->getIdForHtml()).'" data-c3js="'.($container->toJson()).'" class="chart chart--autoload"></div>';
     }
@@ -91,12 +92,10 @@ class C3Js extends AbstractHelper
         }
 
         $this->getView()->headLink()
-            ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css');
-            //->appendStylesheet('/css/c3.min.css');
+            ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.11-rc2/c3.min.css');
         $this->getView()->headScript()
-            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js')
-            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.11-rc1/c3.min.js')
-            //->appendFile('/js/c3.js')
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js')
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.11-rc2/c3.min.js')
             ->appendFile($this->scriptPath.'/c3helper.js');
 
         self::$initialized = true;

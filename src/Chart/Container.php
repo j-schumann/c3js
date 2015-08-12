@@ -109,22 +109,22 @@ class Container
      * Sets the containers div id.
      * Make sure that there is a DOM element/container with this id.
      *
-     * @param string $id (e.g. #mycontainer)
+     * @param string $id (include the leading #, e.g. #mycontainer)
      */
     public function setId($id)
     {
-        $this->config['bindto'] = $id;
+        $this->config['bindto'] = (string) $id;
     }
 
     /**
      * Retrieve the DOM id used for the chart container.
      * Used to retrieve the chart object from the c3helper.
      *
-     * @return type
+     * @return string   includes the leading # as selector
      */
     public function getId()
     {
-        return $this->config['bindto'];
+        return isset($this->config['bindto']) ? $this->config['bindto'] : null;
     }
 
     /**

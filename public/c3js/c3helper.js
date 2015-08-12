@@ -48,6 +48,19 @@
         if (args.done) { args.done(); }
     };
 
+    /**
+     * Overwritten to enforce the configured min/max instead of choosing
+     * the lowest/highest of config and xDomain.
+     *
+     * @returns {Array}
+     */
+    c3.chart.internal.fn.getZoomDomain = function () {
+        var $$ = this, config = $$.config,
+            min = config.zoom_x_min ? config.zoom_x_min : $$.orgXDomain[0],
+            max = config.zoom_x_max ? config.zoom_x_max : $$.orgXDomain[1];
+        return [min, max];
+    };
+
     $.c3Helper = new function() {
         /**
          * Registry of the created chart objects index by their DOM id.

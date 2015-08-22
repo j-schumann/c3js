@@ -53,8 +53,8 @@ abstract class BaseChart implements ChartInterface
         // the end of the classname, e.g. LineChart -> line
 
         // @todo Nicht alle charts müssen im gleichen Namespace liegen, daher
-        // statt bei statisch bei 11 anzufangen lieber den namespace strippen
-        // sauber strippen mit strrpos('\'):
+        // statt statisch bei 11 anzufangen lieber den namespace sauber
+        // strippen mit strrpos('\'):
         $this->config['data']['types'][$this->name]
                 = strtolower(substr(get_class($this), 11, -5));
 

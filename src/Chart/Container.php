@@ -21,7 +21,7 @@ class Container
      *
      * @var array
      */
-    protected $charts;
+    protected $charts = [];
 
     /**
      * Current configuration (but without charts).
@@ -34,6 +34,7 @@ class Container
         'data' => [
             'axes'       => [],
             'colors'     => [],
+            'groups'     => [],
             'mimeType'   => 'json',
             'names'      => [],
             'types'      => [],
@@ -68,7 +69,7 @@ class Container
                 'label' => [
                     'position' => 'outer-center',
                 ],
-                'padding' => [],
+                'padding' => ['left' => 40],
                 'show'    => false,
             ],
         ],
@@ -267,6 +268,26 @@ class Container
             $this->config['axis']['x']['tick'] = [];
         }
         $this->config['axis']['x']['tick']['count'] = $count;
+    }
+
+    /**
+     * Retrieve the currently set data groups.
+     *
+     * @return array
+     */
+    public function getGroups()
+    {
+        return $this->config['data']['groups'];
+    }
+
+    /**
+     * Allows to set the data groups, e.g. for stacked charts.
+     *
+     * @param array $groups
+     */
+    public function setGroups(array $groups)
+    {
+        $this->config['data']['groups'] = $groups;
     }
 
     /**

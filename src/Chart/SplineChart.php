@@ -8,6 +8,11 @@
 
 namespace C3Js\Chart;
 
+/**
+ * Displays a spline chart.
+ *
+ * @link http://c3js.org/samples/chart_spline.html
+ */
 class SplineChart extends LineChart
 {
 }

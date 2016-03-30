@@ -1,7 +1,7 @@
 {
     "name": "vrok/c3js",
     "description": "C3Js wrapper for ZF2",
-    "license": "private",
+    "license": "MIT",
     "homepage": "http://www.vrok.de/",
 
     "require": {

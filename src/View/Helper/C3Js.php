@@ -91,10 +91,12 @@ class C3Js extends AbstractHelper
             return $this;
         }
 
+        // @todo 2016-09-02 - 0.4.11 ist zwar released, wirft aber beim scrollen
+        // im chart einen fehler...
         $this->getView()->headLink()
             ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.11-rc2/c3.min.css');
         $this->getView()->headScript()
-            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js')
+            ->appendFile('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js')
             ->appendFile('//cdnjs.cloudflare.com/ajax/libs/c3/0.4.11-rc2/c3.min.js')
             ->appendFile($this->scriptPath.'/c3helper.js');
 

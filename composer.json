@@ -1,12 +1,12 @@
 {
     "name": "vrok/c3js",
-    "description": "C3Js wrapper for ZF2",
+    "description": "C3Js wrapper for ZF3",
     "license": "MIT",
     "homepage": "http://www.vrok.de/",
 
     "require": {
-        "php": ">=5.5",
-        "zendframework/zendframework": "~2.5.1"
+        "php": ">=7.0",
+        "zendframework/zend-mvc": "^3.0.3"
     },
     "autoload": {
         "psr-4": {

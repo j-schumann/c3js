@@ -35,11 +35,10 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface
     {
         return [
             'factories' => [
-                'C3Js' => function ($helperPluginManager) {
+                'c3Js' => function ($sl) {
                     $helper = new View\Helper\C3Js();
 
-                    $serviceLocator = $helperPluginManager->getServiceLocator();
-                    $config = $serviceLocator->get('Config');
+                    $config = $sl->get('Config');
                     if (!empty($config['C3Js']['script_path'])) {
                         $helper->setScriptPath($config['C3Js']['script_path']);
                     }
